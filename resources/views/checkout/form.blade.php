@@ -86,20 +86,19 @@
 
             @php($paymentMethods = \App\Models\PaymentMethod::active()->get())
             @if($paymentMethods->isNotEmpty())
-                <div class="flex items-center justify-center gap-3 mt-3">
-                    <span class="text-xs text-kriem-muted dark:text-dark-muted">We accept:</span>
-                    @foreach($paymentMethods as $pm)
-                        <span class="inline-flex items-center gap-1 text-xs text-kriem-muted dark:text-dark-muted bg-kriem-surface dark:bg-dark-surface px-2 py-1 rounded-lg">
+                <div class="mt-4 text-center">
+                    <p class="text-xs text-kriem-muted dark:text-dark-muted mb-2">We accept</p>
+                    <div class="flex items-center justify-center flex-wrap gap-2">
+                        @foreach($paymentMethods as $pm)
                             @if($pm->icon_path)
-                                <img src="{{ file_exists(public_path('images/' . $pm->icon_path)) ? asset('images/' . $pm->icon_path) : asset('storage/' . $pm->icon_path) }}" alt="{{ $pm->name }}" class="h-5 w-auto">
+                                <img src="{{ file_exists(public_path('images/' . $pm->icon_path)) ? asset('images/' . $pm->icon_path) : asset('storage/' . $pm->icon_path) }}" alt="{{ $pm->name }}" title="{{ $pm->name }}" class="h-8 w-auto rounded border border-kriem-border dark:border-dark-border">
                             @endif
-                            {{ $pm->name }}
-                        </span>
-                    @endforeach
+                        @endforeach
+                    </div>
                 </div>
             @endif
 
-            <p class="text-xs text-center text-kriem-muted dark:text-dark-muted mt-2">Secure payment powered by Stripe. You will be redirected to complete your purchase.</p>
+            <p class="text-xs text-center text-kriem-muted dark:text-dark-muted mt-3">Secure payment powered by Stripe. You will be redirected to complete your purchase.</p>
         </form>
     </div>
 </div>

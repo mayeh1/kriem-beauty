@@ -199,16 +199,15 @@
             </div>
             @php($footerPayments = \App\Models\PaymentMethod::active()->get())
             @if($footerPayments->isNotEmpty())
-                <div class="mt-6 flex items-center justify-center gap-3 flex-wrap">
-                    <span class="text-xs text-kriem-muted dark:text-dark-muted">Accepted payments:</span>
-                    @foreach($footerPayments as $pm)
-                        <span class="inline-flex items-center gap-1 text-xs text-kriem-muted dark:text-dark-muted bg-kriem-surface dark:bg-dark-surface px-2.5 py-1.5 rounded-lg border border-kriem-border dark:border-dark-border">
+                <div class="mt-6 text-center">
+                    <p class="text-xs text-kriem-muted dark:text-dark-muted mb-2">Accepted Payments</p>
+                    <div class="flex items-center justify-center flex-wrap gap-2">
+                        @foreach($footerPayments as $pm)
                             @if($pm->icon_path)
-                                <img src="{{ file_exists(public_path('images/' . $pm->icon_path)) ? asset('images/' . $pm->icon_path) : asset('storage/' . $pm->icon_path) }}" alt="{{ $pm->name }}" class="h-5 w-auto">
+                                <img src="{{ file_exists(public_path('images/' . $pm->icon_path)) ? asset('images/' . $pm->icon_path) : asset('storage/' . $pm->icon_path) }}" alt="{{ $pm->name }}" title="{{ $pm->name }}" class="h-8 w-auto rounded border border-kriem-border dark:border-dark-border">
                             @endif
-                            {{ $pm->name }}
-                        </span>
-                    @endforeach
+                        @endforeach
+                    </div>
                 </div>
             @endif
             <div class="mt-6 pt-4 border-t border-kriem-border dark:border-dark-border text-center text-xs text-kriem-muted dark:text-dark-muted">
