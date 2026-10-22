@@ -53,10 +53,26 @@ class ProductResource extends Resource
 
             Forms\Components\Section::make('Display')->schema([
                 Forms\Components\FileUpload::make('image_path')
-                    ->image()->directory('products')->label('Product Image'),
+                    ->image()->directory('products')->label('Main Image'),
                 Forms\Components\Toggle::make('is_featured')->label('Featured'),
                 Forms\Components\Toggle::make('is_active')->label('Active')->default(true),
             ])->columns(3),
+
+            Forms\Components\Section::make('Gallery Images')->schema([
+                Forms\Components\Repeater::make('images')
+                    ->relationship()
+                    ->schema([
+                        Forms\Components\FileUpload::make('image_path')
+                            ->image()->directory('products/gallery')->required()->label('Image'),
+                        Forms\Components\TextInput::make('sort_order')
+                            ->numeric()->default(0)->label('Order'),
+                    ])
+                    ->columns(2)
+                    ->orderColumn('sort_order')
+                    ->collapsible()
+                    ->defaultItems(0)
+                    ->addActionLabel('Add Image'),
+            ]),
         ]);
     }
 

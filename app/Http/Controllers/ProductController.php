@@ -8,11 +8,11 @@ class ProductController extends Controller
 {
     public function show(Product $product)
     {
-        $product->load('brand', 'category');
+        $product->load('brand', 'category', 'images');
         $related = Product::active()
             ->where('category_id', $product->category_id)
             ->where('id', '!=', $product->id)
-            ->with('brand')
+            ->with('brand', 'images')
             ->take(4)
             ->get();
 

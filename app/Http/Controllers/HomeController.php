@@ -10,8 +10,8 @@ class HomeController extends Controller
     public function __invoke()
     {
         $categories = Category::orderBy('sort_order')->get();
-        $featured = Product::active()->featured()->with('brand', 'category')->take(8)->get();
-        $products = Product::active()->with('brand', 'category')->latest()->take(12)->get();
+        $featured = Product::active()->featured()->with('brand', 'category', 'images')->take(8)->get();
+        $products = Product::active()->with('brand', 'category', 'images')->latest()->take(12)->get();
 
         return view('home', compact('categories', 'featured', 'products'));
     }

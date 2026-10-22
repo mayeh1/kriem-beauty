@@ -2,7 +2,7 @@
 @section('title', $product->name)
 
 @section('content')
-<div class="max-w-7xl mx-auto px-4 sm:px-6 mt-6" x-data="{ qty: 1 }">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 mt-6" x-data="{ qty: 1, activeImage: '{{ $product->image_path ? asset('storage/' . $product->image_path) : ($product->images->first() ? asset('storage/' . $product->images->first()->image_path) : '') }}' }">
     {{-- Breadcrumb --}}
     <nav class="text-sm text-kriem-muted dark:text-dark-muted mb-4">
         <a href="{{ route('home') }}" class="hover:text-kriem-berry">Home</a>
@@ -13,12 +13,35 @@
     </nav>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {{-- Product Image --}}
-        <div class="bg-white dark:bg-dark-card rounded-2xl border border-kriem-border dark:border-dark-border overflow-hidden aspect-square flex items-center justify-center">
-            @if($product->image_path)
-                <img src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->name }}" class="w-full h-full object-cover">
-            @else
-                <svg class="w-32 h-32 text-kriem-border dark:text-dark-border" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        {{-- Product Image Gallery --}}
+        <div>
+            <div class="bg-white dark:bg-dark-card rounded-2xl border border-kriem-border dark:border-dark-border overflow-hidden aspect-square flex items-center justify-center">
+                <template x-if="activeImage">
+                    <img :src="activeImage" alt="{{ $product->name }}" class="w-full h-full object-cover">
+                </template>
+                <template x-if="!activeImage">
+                    <svg class="w-32 h-32 text-kriem-border dark:text-dark-border" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                </template>
+            </div>
+            @php
+                $allImages = collect();
+                if ($product->image_path) {
+                    $allImages->push(asset('storage/' . $product->image_path));
+                }
+                foreach ($product->images as $img) {
+                    $allImages->push(asset('storage/' . $img->image_path));
+                }
+            @endphp
+            @if($allImages->count() > 1)
+                <div class="flex gap-2 mt-3 overflow-x-auto pb-1">
+                    @foreach($allImages as $imgUrl)
+                        <button @click="activeImage = '{{ $imgUrl }}'"
+                                class="w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 rounded-lg border-2 overflow-hidden transition"
+                                :class="activeImage === '{{ $imgUrl }}' ? 'border-kriem-berry' : 'border-kriem-border dark:border-dark-border hover:border-kriem-berry/50'">
+                            <img src="{{ $imgUrl }}" alt="" class="w-full h-full object-cover">
+                        </button>
+                    @endforeach
+                </div>
             @endif
         </div>
 

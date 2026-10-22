@@ -15,7 +15,7 @@ class SearchController extends Controller
 
         if (strlen($q) >= 2) {
             $products = Product::active()
-                ->with('brand', 'category')
+                ->with('brand', 'category', 'images')
                 ->where(function ($query) use ($q) {
                     $query->where('name', 'like', "%{$q}%")
                         ->orWhere('model_no', 'like', "%{$q}%")

@@ -11,7 +11,7 @@ class CategoryController extends Controller
     {
         $sort = $request->get('sort', 'name');
 
-        $query = $category->products()->active()->with('brand');
+        $query = $category->products()->active()->with('brand', 'images');
 
         $query = match ($sort) {
             'price_asc' => $query->orderBy('price_cents', 'asc'),

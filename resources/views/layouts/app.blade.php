@@ -174,6 +174,7 @@
                         <li>Free shipping on orders $50+</li>
                         <li>Flat rate $5.99 shipping</li>
                         <li>Secure payments via Stripe</li>
+                        <li><a href="{{ route('contact.show') }}" class="hover:text-kriem-berry">Contact Us</a></li>
                     </ul>
                 </div>
             </div>
