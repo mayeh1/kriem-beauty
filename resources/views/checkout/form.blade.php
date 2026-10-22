@@ -91,7 +91,7 @@
                     @foreach($paymentMethods as $pm)
                         <span class="inline-flex items-center gap-1 text-xs text-kriem-muted dark:text-dark-muted bg-kriem-surface dark:bg-dark-surface px-2 py-1 rounded-lg">
                             @if($pm->icon_path)
-                                <img src="{{ asset('storage/' . $pm->icon_path) }}" alt="{{ $pm->name }}" class="h-4 w-auto">
+                                <img src="{{ file_exists(public_path('images/' . $pm->icon_path)) ? asset('images/' . $pm->icon_path) : asset('storage/' . $pm->icon_path) }}" alt="{{ $pm->name }}" class="h-5 w-auto">
                             @endif
                             {{ $pm->name }}
                         </span>
