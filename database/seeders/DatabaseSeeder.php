@@ -10,7 +10,7 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        Role::firstOrCreate(['name' => 'admin']);
+        $this->call(RolePermissionSeeder::class);
 
         $admin = User::firstOrCreate(
             ['email' => env('ADMIN_EMAIL', 'admin@kriembeauty.com')],

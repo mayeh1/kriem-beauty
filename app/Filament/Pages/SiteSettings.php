@@ -19,9 +19,15 @@ class SiteSettings extends Page implements HasForms
 
     protected static ?string $navigationIcon = 'heroicon-o-cog-6-tooth';
     protected static ?string $navigationLabel = 'Site Content';
+    protected static ?string $navigationGroup = 'Administration';
     protected static ?string $title = 'Site Content';
-    protected static ?int $navigationSort = 10;
+    protected static ?int $navigationSort = 9;
     protected static string $view = 'filament.pages.site-settings';
+
+    public static function canAccess(): bool
+    {
+        return auth()->user()?->hasPermissionTo('manage_settings') ?? false;
+    }
 
     public ?array $data = [];
 

@@ -17,6 +17,11 @@ class ProductResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-shopping-bag';
     protected static ?int $navigationSort = 1;
 
+    public static function canAccess(): bool
+    {
+        return auth()->user()?->hasPermissionTo('view_products') ?? false;
+    }
+
     public static function form(Form $form): Form
     {
         return $form->schema([

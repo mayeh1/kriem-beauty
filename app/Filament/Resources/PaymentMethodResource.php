@@ -18,6 +18,11 @@ class PaymentMethodResource extends Resource
     protected static ?string $navigationLabel = 'Payment Methods';
     protected static ?int $navigationSort = 6;
 
+    public static function canAccess(): bool
+    {
+        return auth()->user()?->hasPermissionTo('manage_payment_methods') ?? false;
+    }
+
     public static function form(Form $form): Form
     {
         return $form->schema([
@@ -55,7 +60,15 @@ class PaymentMethodResource extends Resource
             ])
             ->defaultSort('sort_order')
             ->reorderable('sort_order')
-            ->actions([Tables\Actions\EditAction::make()])
+            ->actions([
+                Tables\Actions\Action::make('toggle')
+                    ->label(fn (PaymentMethod $record) => $record->is_active ? 'Disable' : 'Enable')
+                    ->icon(fn (PaymentMethod $record) => $record->is_active ? 'heroicon-o-x-circle' : 'heroicon-o-check-circle')
+                    ->color(fn (PaymentMethod $record) => $record->is_active ? 'danger' : 'success')
+                    ->requiresConfirmation()
+                    ->action(fn (PaymentMethod $record) => $record->update(['is_active' => !$record->is_active])),
+                Tables\Actions\EditAction::make(),
+            ])
             ->bulkActions([Tables\Actions\BulkActionGroup::make([Tables\Actions\DeleteBulkAction::make()])]);
     }
 

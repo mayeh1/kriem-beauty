@@ -16,6 +16,11 @@ class OrderResource extends Resource
 {
     protected static ?string $model = Order::class;
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
+
+    public static function canAccess(): bool
+    {
+        return auth()->user()?->hasPermissionTo('view_orders') ?? false;
+    }
     protected static ?int $navigationSort = 4;
 
     public static function form(Form $form): Form
