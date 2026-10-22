@@ -1,0 +1,30 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-heading: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
+    --font-body: 'Figtree', ui-sans-serif, system-ui, sans-serif;
+    --font-sans: 'Figtree', ui-sans-serif, system-ui, sans-serif;
+
+    --color-kriem-bg: #FBF6FA;
+    --color-kriem-text: #241A2E;
+    --color-kriem-berry: #B02A66;
+    --color-kriem-berry-dark: #8E2253;
+    --color-kriem-gold: #B07812;
+    --color-kriem-gold-light: #D4A033;
+    --color-kriem-border: #ECE0EC;
+    --color-kriem-muted: #6B5A6E;
+    --color-kriem-card: #FFFFFF;
+    --color-kriem-surface: #F5EDF4;
+
+    --color-dark-bg: #1A1220;
+    --color-dark-text: #F0E8F2;
+    --color-dark-card: #251C2E;
+    --color-dark-surface: #2D2238;
+    --color-dark-border: #3D2F48;
+    --color-dark-muted: #9E8DA3;
+}
