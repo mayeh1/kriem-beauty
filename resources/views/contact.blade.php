@@ -3,8 +3,36 @@
 
 @section('content')
 <div class="max-w-3xl mx-auto px-4 sm:px-6 py-10">
-    <h1 class="font-heading text-3xl font-bold text-center">Contact Us</h1>
-    <p class="text-kriem-muted dark:text-dark-muted text-center mt-2">Have a question or feedback? We'd love to hear from you.</p>
+    <h1 class="font-heading text-3xl font-bold text-center">{{ \App\Models\Setting::get('contact_heading', 'Contact Us') }}</h1>
+    <p class="text-kriem-muted dark:text-dark-muted text-center mt-2">{{ \App\Models\Setting::get('contact_subheading', "Have a question or feedback? We'd love to hear from you.") }}</p>
+
+    @php
+        $contactEmail = \App\Models\Setting::get('contact_email');
+        $contactPhone = \App\Models\Setting::get('contact_phone');
+        $contactAddress = \App\Models\Setting::get('contact_address');
+    @endphp
+    @if($contactEmail || $contactPhone || $contactAddress)
+        <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4 text-center text-sm">
+            @if($contactEmail)
+                <div class="bg-white dark:bg-dark-card rounded-xl border border-kriem-border dark:border-dark-border p-4">
+                    <p class="font-semibold mb-1">Email</p>
+                    <a href="mailto:{{ $contactEmail }}" class="text-kriem-berry hover:underline">{{ $contactEmail }}</a>
+                </div>
+            @endif
+            @if($contactPhone)
+                <div class="bg-white dark:bg-dark-card rounded-xl border border-kriem-border dark:border-dark-border p-4">
+                    <p class="font-semibold mb-1">Phone</p>
+                    <a href="tel:{{ $contactPhone }}" class="text-kriem-berry hover:underline">{{ $contactPhone }}</a>
+                </div>
+            @endif
+            @if($contactAddress)
+                <div class="bg-white dark:bg-dark-card rounded-xl border border-kriem-border dark:border-dark-border p-4">
+                    <p class="font-semibold mb-1">Address</p>
+                    <p class="text-kriem-muted dark:text-dark-muted">{{ $contactAddress }}</p>
+                </div>
+            @endif
+        </div>
+    @endif
 
     @if(session('success'))
         <div class="mt-6 bg-green-50 dark:bg-green-900/20 border border-green-300 dark:border-green-700 text-green-700 dark:text-green-300 px-4 py-3 rounded-xl text-center">

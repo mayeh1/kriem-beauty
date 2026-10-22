@@ -92,7 +92,7 @@
             @endif
 
             <div class="mt-4 p-3 bg-kriem-surface dark:bg-dark-surface rounded-xl text-sm text-kriem-muted dark:text-dark-muted">
-                🚚 Free shipping on orders over $50 · Flat $5.99 otherwise
+                🚚 {{ \App\Models\Setting::get('shipping_info_text', 'Free shipping on orders over $50 · Flat $5.99 otherwise') }}
             </div>
         </div>
     </div>

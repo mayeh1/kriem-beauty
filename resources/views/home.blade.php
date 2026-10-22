@@ -6,10 +6,10 @@
     {{-- Hero --}}
     <section class="relative bg-linear-to-r from-kriem-berry to-kriem-berry-dark rounded-3xl overflow-hidden mt-6 p-8 md:p-12 text-white">
         <div class="relative z-10 max-w-lg">
-            <h1 class="font-heading text-3xl md:text-5xl font-bold leading-tight">Beauty That Radiates Confidence</h1>
-            <p class="mt-3 text-white/80 text-lg">Premium skincare, makeup, and fragrances delivered to your door. Free shipping on orders over $50.</p>
-            <a href="{{ route('category.show', 'skincare') }}" class="inline-block mt-6 bg-white text-kriem-berry font-semibold px-6 py-3 rounded-full hover:bg-kriem-bg transition">
-                Shop Skincare
+            <h1 class="font-heading text-3xl md:text-5xl font-bold leading-tight">{{ \App\Models\Setting::get('hero_title', 'Beauty That Radiates Confidence') }}</h1>
+            <p class="mt-3 text-white/80 text-lg">{{ \App\Models\Setting::get('hero_subtitle', 'Premium skincare, makeup, and fragrances delivered to your door. Free shipping on orders over $50.') }}</p>
+            <a href="{{ \App\Models\Setting::get('hero_cta_link', '/category/skincare') }}" class="inline-block mt-6 bg-white text-kriem-berry font-semibold px-6 py-3 rounded-full hover:bg-kriem-bg transition">
+                {{ \App\Models\Setting::get('hero_cta_text', 'Shop Now') }}
             </a>
         </div>
         <div class="absolute right-0 top-0 w-1/2 h-full opacity-10">
