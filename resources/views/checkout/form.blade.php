@@ -84,7 +84,22 @@
                 Pay with Stripe
             </button>
 
-            <p class="text-xs text-center text-kriem-muted dark:text-dark-muted">Secure payment powered by Stripe. You will be redirected to complete your purchase.</p>
+            @php($paymentMethods = \App\Models\PaymentMethod::active()->get())
+            @if($paymentMethods->isNotEmpty())
+                <div class="flex items-center justify-center gap-3 mt-3">
+                    <span class="text-xs text-kriem-muted dark:text-dark-muted">We accept:</span>
+                    @foreach($paymentMethods as $pm)
+                        <span class="inline-flex items-center gap-1 text-xs text-kriem-muted dark:text-dark-muted bg-kriem-surface dark:bg-dark-surface px-2 py-1 rounded-lg">
+                            @if($pm->icon_path)
+                                <img src="{{ asset('storage/' . $pm->icon_path) }}" alt="{{ $pm->name }}" class="h-4 w-auto">
+                            @endif
+                            {{ $pm->name }}
+                        </span>
+                    @endforeach
+                </div>
+            @endif
+
+            <p class="text-xs text-center text-kriem-muted dark:text-dark-muted mt-2">Secure payment powered by Stripe. You will be redirected to complete your purchase.</p>
         </form>
     </div>
 </div>
