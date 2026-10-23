@@ -217,7 +217,7 @@
     </footer>
 
     {{-- WhatsApp floating button --}}
-    @php $whatsappNumber = \App\Models\Setting::get('whatsapp_number'); @endphp
+    @php($whatsappNumber = \App\Models\Setting::get('whatsapp_number'))
     @if($whatsappNumber)
     <a href="https://wa.me/{{ $whatsappNumber }}?text={{ urlencode(\App\Models\Setting::get('whatsapp_message') ?: 'Hi KRIEM Beauty! I have a question.') }}"
        target="_blank" rel="noopener"
