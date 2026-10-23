@@ -37,7 +37,6 @@ class RolePermissionSeeder extends Seeder
             'view_brands', 'create_brands', 'edit_brands',
             'view_orders', 'edit_orders',
             'view_reports',
-            'manage_payment_methods',
         ]);
 
         $staff = Role::firstOrCreate(['name' => 'staff']);

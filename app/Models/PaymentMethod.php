@@ -6,7 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class PaymentMethod extends Model
 {
-    protected $fillable = ['name', 'slug', 'description', 'instructions', 'icon_path', 'is_active', 'sort_order'];
+    protected $fillable = [
+        'name', 'slug', 'description', 'instructions',
+        'account_email', 'account_tag', 'bank_name', 'account_name', 'account_number', 'routing_number',
+        'icon_path', 'is_active', 'sort_order',
+    ];
 
     protected $casts = [
         'is_active' => 'boolean',
