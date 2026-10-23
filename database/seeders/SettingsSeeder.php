@@ -34,6 +34,10 @@ class SettingsSeeder extends Seeder
             // Shipping
             ['group' => 'shipping', 'key' => 'shipping_info_text', 'label' => 'Shipping Info (product page)', 'type' => 'text', 'value' => 'Free shipping on orders over $50 · Flat $5.99 otherwise', 'sort_order' => 1],
 
+            // WhatsApp
+            ['group' => 'whatsapp', 'key' => 'whatsapp_number', 'label' => 'WhatsApp Number', 'type' => 'text', 'value' => '', 'sort_order' => 1],
+            ['group' => 'whatsapp', 'key' => 'whatsapp_message', 'label' => 'Default Message', 'type' => 'text', 'value' => 'Hi KRIEM Beauty! I have a question.', 'sort_order' => 2],
+
             // Social Links
             ['group' => 'social', 'key' => 'social_instagram', 'label' => 'Instagram URL', 'type' => 'text', 'value' => '', 'sort_order' => 1],
             ['group' => 'social', 'key' => 'social_facebook', 'label' => 'Facebook URL', 'type' => 'text', 'value' => '', 'sort_order' => 2],

@@ -77,6 +77,17 @@ class SiteSettings extends Page implements HasForms
                         TextInput::make('shipping_info_text')->label('Shipping Info (shown on product pages)'),
                     ]),
 
+                Section::make('WhatsApp Chat Button')
+                    ->description('Floating chat button shown on every page (bottom-right corner)')
+                    ->schema([
+                        TextInput::make('whatsapp_number')
+                            ->label('WhatsApp Number')
+                            ->helperText('Country code + number, no spaces or dashes (e.g. 12125551234). Leave empty to hide the button.'),
+                        TextInput::make('whatsapp_message')
+                            ->label('Default Greeting Message')
+                            ->helperText('Pre-filled message when customers tap the button'),
+                    ])->columns(2),
+
                 Section::make('Social Media Links')
                     ->schema([
                         TextInput::make('social_instagram')->label('Instagram URL')->url(),
